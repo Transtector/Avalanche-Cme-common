@@ -42,7 +42,7 @@ RECOVERY_FILE = os.path.abspath(os.path.join(USERDATA, '.recovery')) # /data/.re
 
 # How long to hold reset button?
 RESET_REBOOT_SECONDS = 3 # <= this time: reboot; > this time: recovery or factory reset
-RESET_RECOVERY_SECONDS = 6 # <= this time: recovery mode; > this time: factory reset
+RESET_RECOVERY_SECONDS = 10 # <= this time: recovery mode; > this time: factory reset
 
 
 # uploads go to temp folder above app
