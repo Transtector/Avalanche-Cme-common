@@ -75,7 +75,7 @@ def _reboot(delay=5, logger=None):
 	if is_a_cme():
 
 		if is_a_docker():
-			docker_run(['reboot'])
+			docker_run(['shutdown', '-r', 'now'])
 		else:
-			subprocess.call(['reboot'])
+			subprocess.call(['shutdown', '-r', 'now'])
 
