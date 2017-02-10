@@ -11,7 +11,25 @@ DEBUG = True
 HOSTNAME = platform.node()
 SYSTEM = platform.uname()
 
-APPROOT = os.path.abspath(os.getcwd()) # /root/Cme-init
+# Each CME package is stored at APPROOT.
+# When this file (Config.py) is imported by each
+# package, APPROOT will hold its folder.  So, here
+# are the general results:
+# Cme-init: /root/Cme-init
+# Cme: /root/Cme
+# Cme-hw: /root/Cme-hw
+APPROOT = os.path.abspath(os.getcwd())
+
+# Each CME package uses a simple VERSION file
+# to hold its revision.  The file should be
+# found in the package root folder.
+VERSION_FILE = os.path.join(APPROOT, 'VERSION')
+VERSION = 'x.x.x'
+
+# It's a complete failure if VERSION cannot be read...
+with open(VERSION_FILE, "r") as f:
+	VERSION = f.readline().strip()
+
 
 USERDATA = os.path.abspath('/data') # User data is stored here
 
@@ -93,20 +111,12 @@ SERVER_PORT = 80 # ports < 1024 require sudo to start
 USERNAME = 'admin'
 PASSHASH = 'b56e0b4ea4962283bee762525c2d490f' # md5('Welcome1')
 
-# CME firmware version is set and read from this text
-# file in the CME application root folder.
-VERSION_FILE = 'VERSION'
-VERSION = 'x.x.x'
-
-# It's a complete failure if VERSION cannot be read...
-with open(os.path.join(APPROOT, VERSION_FILE), "r") as f:
-	VERSION = f.readline().strip()
 
 # CME Device info is 'hard-coded' into the device.json
 # read-only file in the USERDATA folder.
-DEVICE_FILE = 'device.json'
+DEVICE_FILE = os.path.join(USERDATA, 'device.json')
 try:
-	with open(os.path.join(USERDATA, DEVICE_FILE), "r") as f:
+	with open(DEVICE_FILE, "r") as f:
 		DEVICE_DATA = json.load(f)
 except:
 	# Default device data below.  We get here because no device.json file yet exists.
