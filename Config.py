@@ -22,6 +22,11 @@ USERDATA = os.path.abspath('/data') # User data is stored here
 # See RECOVERY key below.
 RECOVERY_FILE = os.path.abspath(os.path.join(USERDATA, '.recovery')) # /data/.recovery
 
+# How long to hold reset button?
+RESET_REBOOT_SECONDS = 3 # <= this time: reboot; > this time: recovery or factory reset
+RESET_RECOVERY_SECONDS = 6 # <= this time: recovery mode; > this time: factory reset
+
+
 # uploads go to temp folder above app
 # this name is used by Flask as well
 UPLOAD_FOLDER = os.path.abspath(os.path.join(USERDATA, 'tmp')) # /data/tmp
