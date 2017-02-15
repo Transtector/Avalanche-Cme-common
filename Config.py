@@ -160,16 +160,29 @@ TEMPERATURE_WARNING_TEMP = 65 # ºC
 TEMPERATURE_ALARM_TEMP = 80 # ºC
 
 
-# CME Clock configuration
-# These settings are read from the /etc/network configuration.  On factory
-# resets, the network can (optionally) be reset as well.
-# (see Cme/ref/interfaces_static; deploys to /etc/network/interfaces_static)
-from .ClockUtils import check_ntp, ntp_servers
+''' CLOCK (ntp) CONFIGURATION
 
-# default NTP settings are obtained from /etc/ntp.conf
-CLOCK_USE_NTP = check_ntp()
-CLOCK_NTP_SERVERS = ntp_servers()
-CLOCK_ZONE_OFFSET = 0
+	These keys must be initialized before use.  After importing Config
+	do a Config.initialize_Clock() to get these values loaded.  Note
+	that if you're doing this from a dockerized Python app, then you'll
+	need the cme-docker-fifo.sh system call handler running as well as
+	extra volumes mapped.  Typically this is _only_ done for the CME
+	API layer package (cme). '''
+CLOCK_USE_NTP = None
+CLOCK_NTP_SERVERS = None
+def initialize_Clock():
+	# These settings are read from the /etc/network configuration.  On factory
+	# resets, the network can (optionally) be reset as well.
+	# (see Cme/ref/interfaces_static; deploys to /etc/network/interfaces_static)
+	from .ClockUtils import check_ntp, ntp_servers
+
+	global CLOCK_USE_NTP
+	global CLOCK_NTP_SERVERS
+
+	# default NTP settings are obtained from /etc/ntp.conf
+	CLOCK_USE_NTP = check_ntp()
+	CLOCK_NTP_SERVERS = ntp_servers()
+
 
 # lookup for clock display reference zone
 # this is manually duplicated in client code,
@@ -189,18 +202,35 @@ CLOCK_DISPLAY_24HOUR_FORMAT = "HH:mm:ss"
 CLOCK_DISPLAY_12HOUR_FORMAT = "h:mm:ss A"
 
 
-# CME Network configuration
-# These settings are read from the /etc/network configuration.  On factory
-# resets, the network can (optionally) be reset as well.
-# (see Cme/ref/interfaces_static; deploys to /etc/network/interfaces_static)
-from .IpUtils import mac, dhcp, address, netmask, gateway
+''' NETWORK (ntp) CONFIGURATION
 
-# just read the MAC
-MAC = mac()
-
-DHCP = dhcp() # False
-ADDRESS = address() # 192.168.1.30
-NETMASK = netmask() # 255.255.255.0
-GATEWAY = gateway() # 192.168.1.1
+	These keys must be initialized before use.  After importing Config
+	do a Config.initialize_Network() to get these values loaded.  Note
+	that if you're doing this from a dockerized Python app, then you'll
+	need the cme-docker-fifo.sh system call handler running as well as
+	extra volumes mapped.  Typically this is _only_ done for the CME
+	API layer package (cme). '''
+MAC = ''
+DHCP = False
+ADDRESS = '0.0.0.0'
+NETMASK = '0.0.0.0'
+GATEWAY = '0.0.0.0'
 PRIMARY = '8.8.4.4'
 SECONDARY = '8.8.8.8'
+def initialize_Network():
+	# These settings are read from the /etc/network configuration.  On factory
+	# resets, the network can (optionally) be reset as well.
+	# (see Cme/ref/interfaces_static; deploys to /etc/network/interfaces_static)
+	from .IpUtils import mac, dhcp, address, netmask, gateway
+
+	global MAC
+	global DHCP
+	global ADDRESS
+	global NETMASK
+	global GATEWAY
+
+	MAC = mac() # just read the MAC address from network interface
+	DHCP = dhcp() # False
+	ADDRESS = address() # 192.168.1.30
+	NETMASK = netmask() # 255.255.255.0
+	GATEWAY = gateway() # 192.168.1.1
