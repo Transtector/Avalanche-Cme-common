@@ -183,7 +183,6 @@ def initialize_Clock():
 	CLOCK_USE_NTP = check_ntp()
 	CLOCK_NTP_SERVERS = ntp_servers()
 
-
 # lookup for clock display reference zone
 # this is manually duplicated in client code,
 # so be careful when making changes
@@ -195,6 +194,7 @@ class RelativeTo:
 
 # clock display settings
 # see momentjs.org for valid display formats
+CLOCK_ZONE_OFFSET = 0
 CLOCK_DISPLAY_RELATIVE_TO = RelativeTo.UTC
 CLOCK_DISPLAY_12HOUR = False
 CLOCK_DISPLAY_DATE_FORMAT = "YYYY-MM-DD" 
