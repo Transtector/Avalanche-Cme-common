@@ -56,7 +56,7 @@ UPDATE = os.path.abspath(os.path.join(USERDATA, 'update')) # /data/update
 USB = os.path.abspath('/media/usb')
 
 # globbing pattern for update image files
-UPDATE_GLOB = '1500-???-v*-SWARE-CME*.tgz'
+UPDATE_GLOB = '15??-???-v*-SWARE-CME*.tgz'
 PUBLIC_UPDATES_URL = 'https://s3.amazonaws.com/transtectorpublicdownloads/'
 
 
