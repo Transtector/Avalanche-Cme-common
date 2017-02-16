@@ -1,4 +1,4 @@
-import os, platform, logging
+import os, platform, logging, subprocess
 import uuid, socket, fcntl, struct, fileinput
 
 from . import is_a_cme, is_a_docker, docker_run
