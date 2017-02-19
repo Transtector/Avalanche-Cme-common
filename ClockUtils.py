@@ -256,11 +256,22 @@ def __parse_ntpq(ntpq_result):
 
 	last_poll_time = (datetime.utcnow() - timedelta(seconds=last_poll_s)).isoformat()
 
+
+	# TODO: we were getting an error parsing 'reach'.  This was a quick fix patch,
+	# but we really need to parse the ntpq results better.
 	# how often are we polling
-	poll_s = int(data['poll'])
+	try:
+		poll_s = int(data['poll'])
+	except:
+		poll_s = int(64)
 
 	# look at the "reach" to calculate a last success time
-	reach = int(data['reach'], 8) # convert from Octal representation
+	try:
+		reach = int(data['reach'], 8) # convert from Octal representation
+	except:
+		reach = int(377, 8)
+	# TODO END: Quick fix
+
 
 	# edge cases
 	if reach == 0:
