@@ -212,9 +212,9 @@ CLOCK_DISPLAY_12HOUR_FORMAT = "h:mm:ss A"
 	API layer package (cme). '''
 MAC = ''
 DHCP = False
-ADDRESS = '0.0.0.0'
-NETMASK = '0.0.0.0'
-GATEWAY = '0.0.0.0'
+ADDRESS = '192.168.1.30'
+NETMASK = '255.255.255.0'
+GATEWAY = '192.168.1.1'
 PRIMARY = '8.8.4.4'
 SECONDARY = '8.8.8.8'
 def initialize_Network():

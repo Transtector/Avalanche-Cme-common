@@ -263,13 +263,13 @@ def __parse_ntpq(ntpq_result):
 	try:
 		poll_s = int(data['poll'])
 	except:
-		poll_s = int(64)
+		poll_s = 64
 
 	# look at the "reach" to calculate a last success time
 	try:
 		reach = int(data['reach'], 8) # convert from Octal representation
 	except:
-		reach = int(377, 8)
+		reach = int('377', 8)
 	# TODO END: Quick fix
 
 
