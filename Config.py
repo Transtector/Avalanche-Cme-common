@@ -81,8 +81,18 @@ ACCESSLOG = os.path.join(LOGDIR, 'access.log')
 #	$ python -m cme --rrdcached 'server'
 RRDCACHED = None #'localhost'
 
-# Cme-hw polling loop speed
-LOOP_PERIOD_s = 1.0
+
+
+####  Cme-hw specific configuration items
+
+LOOP_PERIOD_s = 1.0 # Cme-hw polling loop speed
+BUFFER_POINTS = 5 # each sensor keeps a rolling buffer of this many points
+MAX_ALARM_POINTS = 20 # max number of points recorded during alarm condition
+ALARM_LEAD_POINTS = 5 # number of pre- and post-alarm points saved in alarm traces
+
+#### End Cme-hw specific
+
+
 
 # user-defined API layer settings are kept here
 SETTINGS = os.path.join(USERDATA, 'settings.json')
