@@ -203,6 +203,19 @@ class API:
 	PASSHASH = 'b56e0b4ea4962283bee762525c2d490f' # md5('Welcome1')
 
 
+class FLASK:
+	''' These keys are used by Flask (our wsgi application)
+	'''
+	DEBUG = INFO.DEBUG
+	SECRET_KEY = API.SECRET_KEY
+	SESSION_COOKIE_NAME = API.SESSION_COOKIE_NAME
+	SESSION_EXPIRATION = API.SESSION_EXPIRATION
+	UPLOAD_FOLDER = PATHS.UPLOADS
+	MAX_CONTENT_LENGTH = UPDATES.MAX_CONTENT_LENGTH
+
+
+
+
 from .DictPersistJSON import DictPersistJSON
 from .ClockUtils import check_ntp, ntp_servers
 from .IpUtils import mac, dhcp, address, netmask, gateway
