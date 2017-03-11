@@ -59,7 +59,7 @@ class PATHS:
 	# channel data and configuration are stored here
 	CHDIR = os.path.abspath(os.path.join(USERDATA, 'channels')) # /data/channels
 
-	VERSION_FILE = os.path.join(PATHS.APPROOT, 'VERSION')
+	VERSION_FILE = os.path.join(APPROOT, 'VERSION')
 
 	DEVICE_FILE = os.path.join(USERDATA, 'device.json')
 
