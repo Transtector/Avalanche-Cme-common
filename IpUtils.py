@@ -129,7 +129,6 @@ def manage_network(network_settings):
 
 	if not is_a_cme():
 		logger.info("\tWARNING: Not a recognized CME platform - no actual changes will be made!")
-		return
 
 	# if settings say use DHCP and we're not
 	if use_dhcp != currently_dhcp:
@@ -161,13 +160,21 @@ def manage_network(network_settings):
 		if not use_dhcp:
 			write_network_addresses(network_settings)
 
-		# restarts/reloads the network
+		# restart the network
 		cmd = ['systemctl', 'restart', 'networking']
 
-		if is_a_docker():
+		if is_a_cme() and is_a_docker():
 			docker_run(cmd)
-		else:
+		elif is_a_cme():
 			subprocess.run(cmd)
+
+	# load settings from DHCP values after network restarted
+	if use_dhcp:
+		network_settings.update({
+			'address': address(),
+			'netmask': netmask(),
+			'gateway': gateway()
+			})
 
 
 def write_network_addresses(net_settings):
