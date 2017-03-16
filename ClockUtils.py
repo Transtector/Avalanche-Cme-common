@@ -45,11 +45,13 @@ def check_ntp():
 	return result.lower() == 'active'
 
 
-def manage_clock(clock_settings):
+def manage_clock(user_settings):
 	''' Manage the NTP daemon and servers used in ntp.conf.
 
 		Function does nothing if not a cme device.
 	''' 
+	clock_settings = user_settings['clock']
+
 	update_ntp = False
 	current_ntp = check_ntp()
 	current_servers = ntp_servers()

@@ -110,7 +110,9 @@ def set_dhcp(on=True):
 
 # looks at network settings compared with current network
 # and reconfigures and reloads the network if different
-def manage_network(network_settings):
+def manage_network(user_settings):
+
+	network_settings = user_settings['network']
 
 	reload_network = False
 	currently_dhcp = dhcp()
@@ -175,6 +177,7 @@ def manage_network(network_settings):
 			'netmask': netmask(),
 			'gateway': gateway()
 			})
+		user_settings.update({ 'network': network_settings })
 
 
 def write_network_addresses(net_settings):
