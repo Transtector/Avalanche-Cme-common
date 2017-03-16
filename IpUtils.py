@@ -83,13 +83,15 @@ def gateway():
 	if not is_a_cme():
 		return '127.0.0.1'
 
-	with open('/proc/net/route') as f:
-		for line in f:
-			fields = line.strip().split()
-			if fields[1] != '00000000' or not int(fields[3], 16) & 2:
-				continue
-
-	return socket.inet_ntoa(struct.pack('<L', int(fields[2], 16)))
+	#with open('/proc/net/route') as f:
+	#	for line in f:
+	#		fields = line.strip().split()
+	#		if fields[1] != '00000000' or not int(fields[3], 16) & 2:
+	#			continue
+	#return socket.inet_ntoa(struct.pack('<L', int(fields[2], 16)))
+	gw = subprocess.run(['ip','route', 'show', '0.0.0.0/0', 'dev', 'eth0'], stdout=subprocess.PIPE).stdout
+	gw = gw.strip().decode().split(' ')[2]
+	return gw
 
 
 def set_dhcp(on=True):
