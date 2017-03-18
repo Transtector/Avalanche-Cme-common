@@ -20,11 +20,14 @@ class DictPersistJSON(dict):
 				json.dump(self, tf, indent="\t")
 				tempname = tf.name
 
-			os.replace(tempname, self.filename)		
+			os.replace(tempname, self.filename)	
+			os.chmod(self.filename, 0o664)
 
 	def _update(self, *args, **kwargs):
 		# internal update does not trigger dump
 		for k, v in dict(*args, **kwargs).items():
+			if isinstance(v, dict):
+				v.update(self.get(k, {}))
 			dict.__setitem__(self, k, v)
 
 	def __getitem__(self, key):
