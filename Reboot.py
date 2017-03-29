@@ -24,13 +24,14 @@ def restart(delay=5, recovery_mode=False, factory_reset=False, settings_file=Non
 		recovery_mode prevents docker modules (Cme, Cme-hw) from starting and just launches the
 		base API (cme) under the base OS.
 	'''
-	if factory_reset and settings_file:
+	if factory_reset and settings_file and os.path.isfile(settings_file):
 		try:
-			os.remove(setings_file)
+			os.remove(settings_file)
 			if logger:
 				logger.info("CME user settings file removed")
-		except:
-			pass
+		except Exception as e:
+			if logger:
+				logger.error("CME failed to remove user settings file, {}".format(e))
 
 		if is_a_cme():
 			set_dhcp(False)
