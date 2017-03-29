@@ -27,11 +27,16 @@ def restart(delay=5, recovery_mode=False, factory_reset=False, settings_file=Non
 	if factory_reset and settings_file:
 		try:
 			os.remove(setings_file)
+			if logger:
+				logger.info("CME user settings file removed")
 		except:
 			pass
 
 		if is_a_cme():
 			set_dhcp(False)
+			if logger:
+				logger.info("CME DHCP turned OFF - static addressing will be used")
+
 			write_network_addresses({ 
 				'address': '192.168.1.30', 
 				'netmask': '255.255.255.0', 
@@ -39,8 +44,12 @@ def restart(delay=5, recovery_mode=False, factory_reset=False, settings_file=Non
 				'primary': '8.8.4.4',
 				'secondary': '8.8.8.8' 
 			})
+			if logger:
+				logger.info("CME network settings reset to factory defaults")
 
 			ntp_servers(['time.nist.gov'])
+			if logger:
+				logger.info("CME NTP servers set to factory defaults")
 
 			ntp_enable = ['systemctl', 'enable', 'ntp']
 
@@ -49,17 +58,16 @@ def restart(delay=5, recovery_mode=False, factory_reset=False, settings_file=Non
 			else:
 				subprocess.call(ntp_enable)
 
-		if logger:
-			logger.info("CME configuration reset to factory defaults")
-	
+			if logger:
+				logger.info("CME NTP system enabled")
+		
 	if recovery_mode and not os.path.isfile(recovery_file):
-		if logger:
-			logger.info("Setting CME for recovery mode boot")
 		open(recovery_file, 'w').close()
+		if logger:
+			logger.info("CME set to boot into recovery mode")
 	
-	else:
-		if os.path.isfile(recovery_file):
-			os.remove(recovery_file)
+	elif os.path.isfile(recovery_file):
+		os.remove(recovery_file)
 
 	_reboot(delay, logger)
 

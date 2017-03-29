@@ -39,30 +39,34 @@ class PATHS:
 	''' Holds the file paths shared throughout the system.
 	'''
 	APPROOT = os.path.abspath(os.getcwd()) # /root/<package>, e.g., "/root/Cme/"
-	USERDATA = os.path.abspath('/data') # User data is stored here
+	
+	USERDATA = os.path.abspath('/Users/ssumjbrunner/workspace/Avalanche/Data') # User data is stored here
+
+	# All packages use a version file to convey their version
+	VERSION_FILE = os.path.join(APPROOT, 'VERSION')
 
 	# This is where the USER_SETTINGS are kept
 	SETTINGS = os.path.join(USERDATA, 'settings.json')
 
+	# Alarms are stored here by the Cme-hw and read by the API layer
 	ALARMS_DB = os.path.join(USERDATA, 'alarms.db')
 
-	# uploads go to temp folder above app
-	UPLOADS = os.path.abspath(os.path.join(USERDATA, 'tmp'))
+	# uploads go to temp folder here
+	UPLOADS = os.path.join(USERDATA, 'tmp')
 
-	# updates are pending until restart, then removed if successful
-	UPDATE = os.path.abspath(os.path.join(USERDATA, 'update'))
+	# updates here are pending until restart, then removed if successful
+	UPDATE = os.path.join(USERDATA, 'update')
 
 	# updates can be put on USB (removable) media
 	USB = os.path.abspath('/media/usb')
 
 	# where log files are kept
-	LOGDIR = os.path.abspath(os.path.join(USERDATA, 'log'))
+	LOGDIR = os.path.join(USERDATA, 'log')
 
 	# channel data and configuration are stored here
-	CHDIR = os.path.abspath(os.path.join(USERDATA, 'channels')) # /data/channels
+	CHDIR = os.path.join(USERDATA, 'channels')
 
-	VERSION_FILE = os.path.join(APPROOT, 'VERSION')
-
+	# the CME device and HOST information are stored here
 	DEVICE_FILE = os.path.join(USERDATA, 'device.json')
 
 	# This file created prior to rebooting to signal init process to boot to recovery mode
@@ -203,6 +207,7 @@ class API:
 
 	USERNAME = 'admin'
 	PASSHASH = 'b56e0b4ea4962283bee762525c2d490f' # md5('Welcome1')
+
 
 
 class FLASK:
