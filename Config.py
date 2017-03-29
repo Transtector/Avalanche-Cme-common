@@ -40,7 +40,7 @@ class PATHS:
 	'''
 	APPROOT = os.path.abspath(os.getcwd()) # /root/<package>, e.g., "/root/Cme/"
 	
-	USERDATA = os.path.abspath('/Users/ssumjbrunner/workspace/Avalanche/Data') # User data is stored here
+	USERDATA = os.path.abspath('/data') # User data is stored here
 
 	# All packages use a version file to convey their version
 	VERSION_FILE = os.path.join(APPROOT, 'VERSION')
@@ -73,7 +73,7 @@ class PATHS:
 	# (i.e., don't launch module dockers).  Note that it is removed after detection by the
 	# boot process.  Recovery mode is indicated if the cme package is NOT running inside a
 	# docker container.
-	RECOVERY_FILE = os.path.abspath(os.path.join(USERDATA, '.recovery'))
+	RECOVERY_FILE = os.path.join(USERDATA, '.recovery')
 
 	# create USERDATA folders if they don't yet exist
 	for p in [ UPLOADS, UPDATE, LOGDIR, CHDIR ]:
