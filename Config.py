@@ -44,6 +44,8 @@ class PATHS:
 	# This is where the USER_SETTINGS are kept
 	SETTINGS = os.path.join(USERDATA, 'settings.json')
 
+	ALARMS_DB = os.path.join(USERDATA, 'alarms.db')
+
 	# uploads go to temp folder above app
 	UPLOADS = os.path.abspath(os.path.join(USERDATA, 'tmp'))
 
