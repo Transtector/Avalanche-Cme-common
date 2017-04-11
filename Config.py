@@ -38,9 +38,11 @@ class RelativeTo:
 class PATHS:
 	''' Holds the file paths shared throughout the system.
 	'''
-	APPROOT = os.path.abspath(os.getcwd()) # /root/<package>, e.g., "/root/Cme/"
+	APPROOT = os.path.abspath(os.getcwd()) # /root/<package>, e.g., "/root/Cme-api/"
 	
 	USERDATA = os.path.abspath('/data') # User data is stored here
+
+	WEB_ROOT = os.path.abspath('/root/Cme-web') # Web application
 
 	# All packages use a version file to convey their version
 	VERSION_FILE = os.path.join(APPROOT, 'VERSION')
