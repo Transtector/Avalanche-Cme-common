@@ -138,7 +138,7 @@ class UPDATES:
 	PUBLIC_UPDATES_URL = ['https://s3.amazonaws.com/transtectorpublicdownloads/']
 
 	# Filnames much match this pattern to be seen in API
-	UPDATE_GLOB = '15??-???-v*-SWARE-CME*.tgz'
+	UPDATE_GLOB = '1500-???-v*-SWARE-CME_*.tgz'
 
 	# TODO: figure out size/extension for actual firmware files
 	ALLOWED_EXTENSIONS = ['tgz', 'tar.gz']
@@ -156,9 +156,11 @@ class RECOVERY:
 	RECOVERY_MODE = not is_a_docker()
 
 	# How long to hold reset button?
-	RESET_REBOOT_SECONDS = 3 # <= this time: reboot; > this time: recovery or factory reset
-	RESET_RECOVERY_SECONDS = 10 # <= this time: recovery mode; > this time: factory reset
+	RESET_REBOOT_SECONDS = 3 # simple reboot if held < this time
+	RESET_RECOVERY_SECONDS = 6 # recovery mode reboot if held > this time
+	RESET_FACTORY_SECONDS = 9 # factory reset (and recovery mode)
 
+	RESET_REBOOT_DELAY_SECONDS = 5 # reboots are triggered after this many seconds
 
 
 class LOGGING:
