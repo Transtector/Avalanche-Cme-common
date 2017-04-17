@@ -77,6 +77,15 @@ class PATHS:
 	# docker container.
 	RECOVERY_FILE = os.path.join(USERDATA, '.recovery')
 
+	# If this file exists during a SIGTERM, the power control MCU
+	# will remove power from the system after a brief delay.  The
+	# SIGTERM signal is handled by the Cme-init/__main__.py>cleanup().
+	# The file is removed by cleanup right after it's detected.
+	# The common/Reboot.py>_reboot() call is responsible for creating
+	# the file to signal the halt.
+	POWEROFF_FILE = os.path.join(USERDATA, '.poweroff')
+
+
 	# create USERDATA folders if they don't yet exist
 	for p in [ UPLOADS, UPDATE, LOGDIR, CHDIR ]:
 		if not os.path.exists(p):
@@ -160,7 +169,7 @@ class RECOVERY:
 	RESET_RECOVERY_SECONDS = 6 # recovery mode reboot if held > this time
 	RESET_FACTORY_SECONDS = 9 # factory reset (and recovery mode)
 
-	RESET_REBOOT_DELAY_SECONDS = 5 # reboots are triggered after this many seconds
+	RESET_REBOOT_DELAY_SECONDS = 1 # reboot/power off are triggered after this many seconds
 
 
 class LOGGING:
