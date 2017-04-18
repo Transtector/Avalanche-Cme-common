@@ -42,7 +42,7 @@ class PATHS:
 	
 	USERDATA = os.path.abspath('/data') # User data is stored here
 
-	WEB_ROOT = os.path.abspath('/root/Cme-web') # Web application
+	WEB_ROOT = os.path.abspath('/www') # Web application is mapped from Cme-web docker container volume
 
 	# All packages use a version file to convey their version
 	VERSION_FILE = os.path.join(APPROOT, 'VERSION')
@@ -147,7 +147,7 @@ class UPDATES:
 	PUBLIC_UPDATES_URL = ['https://s3.amazonaws.com/transtectorpublicdownloads/']
 
 	# Filnames much match this pattern to be seen in API
-	UPDATE_GLOB = '1500-???-v*-SWARE-CME_*.tgz'
+	UPDATE_GLOB = '1500-???-v*-SWARE-CME_*_pkg.tgz'
 
 	# TODO: figure out size/extension for actual firmware files
 	ALLOWED_EXTENSIONS = ['tgz', 'tar.gz']
