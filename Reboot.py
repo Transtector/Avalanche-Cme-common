@@ -58,9 +58,9 @@ def restart(power_off=False, recovery_mode=False, factory_reset=False, logger=No
 			ntp_servers(['time.nist.gov'])
 			ntp_enable = ['systemctl', 'enable', 'ntp']
 			if is_a_docker():
-				#docker_run(ntp_enable)
+				pass #docker_run(ntp_enable)
 			else:
-				#subprocess.call(ntp_enable)
+				pass #subprocess.call(ntp_enable)
 
 			if logger:
 				logger.info("CME NTP servers set to factory defaults")
