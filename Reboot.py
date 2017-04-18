@@ -30,6 +30,7 @@ def restart(power_off=False, recovery_mode=False, factory_reset=False, logger=No
 
 	delay = Config.RECOVERY.RESET_REBOOT_DELAY_SECONDS
 
+	# Handle factory reset
 	if factory_reset and settings_file and os.path.isfile(settings_file):
 		try:
 			#os.remove(settings_file)
@@ -67,19 +68,24 @@ def restart(power_off=False, recovery_mode=False, factory_reset=False, logger=No
 				logger.info("CME NTP system enabled")
 
 		
+	# Handle recovery mode
 	if recovery_mode and not os.path.isfile(recovery_file):
 		open(recovery_file, 'w').close()
 		if logger:
 			logger.info("CME set to boot into recovery mode")
-	
 	elif os.path.isfile(recovery_file):
 		os.remove(recovery_file)
 
-	if power_off:
+
+	# Handle power down
+	if power_off and not os.path.isfile(poweroff_file):
 		open(poweroff_file, 'w').close()
 		if logger:
 			logger.info("CME set to power off/standby")
+	elif os.path.isfile(poweroff_file):
+		os.remove(poweroff_file)
 
+	# Call reboot w/short delay
 	_reboot(delay, power_off, logger)
 
 
