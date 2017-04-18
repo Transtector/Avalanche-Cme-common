@@ -33,7 +33,7 @@ def restart(power_off=False, recovery_mode=False, factory_reset=False, logger=No
 	# Handle factory reset
 	if factory_reset and settings_file and os.path.isfile(settings_file):
 		try:
-			#os.remove(settings_file)
+			os.remove(settings_file)
 			if logger:
 				logger.info("CME user settings file removed")
 
@@ -42,26 +42,26 @@ def restart(power_off=False, recovery_mode=False, factory_reset=False, logger=No
 				logger.error("CME failed to remove user settings file, {}".format(e))
 
 		if is_a_cme():
-			#set_dhcp(False)
+			set_dhcp(False)
 			if logger:
 				logger.info("CME DHCP turned OFF - static addressing will be used")
 
-			#write_network_addresses({ 
-			#	'address': '192.168.1.30', 
-			#	'netmask': '255.255.255.0', 
-			#	'gateway': '192.168.1.1',
-			#	'primary': '8.8.4.4',
-			#	'secondary': '8.8.8.8' 
-			#})
+			write_network_addresses({ 
+				'address': '192.168.1.30', 
+				'netmask': '255.255.255.0', 
+				'gateway': '192.168.1.1',
+				'primary': '8.8.4.4',
+				'secondary': '8.8.8.8' 
+			})
 			if logger:
 				logger.info("CME network settings reset to factory defaults")
 			
 			ntp_servers(['time.nist.gov'])
 			ntp_enable = ['systemctl', 'enable', 'ntp']
 			if is_a_docker():
-				pass #docker_run(ntp_enable)
+				docker_run(ntp_enable)
 			else:
-				pass #subprocess.call(ntp_enable)
+				subprocess.call(ntp_enable)
 
 			if logger:
 				logger.info("CME NTP servers set to factory defaults")
