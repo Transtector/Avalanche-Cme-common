@@ -121,8 +121,8 @@ def manage_network(user_settings):
 
 	use_dhcp = network_settings['dhcp']
 
-	# get the app root logger
-	logger = logging.getLogger('cme')
+	# get the root logger
+	logger = logging.getLogger(__name__)
 
 	logger.info("Network\t\tSetting\t(current)")
 	logger.info("\tMAC:\t\t{0}".format(network_settings['mac']))

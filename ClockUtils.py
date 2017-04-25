@@ -62,7 +62,7 @@ def manage_clock(user_settings):
 	# NTP init
 	# Note that ntp should NOT be setup in init.d to start automatically:
 	# root@minibian:~# systemctl disable ntp
-	logger = logging.getLogger('cme')
+	logger = logging.getLogger(__name__)
 
 	logger.info("NTP\t\t\tSetting\t(current)")
 	logger.info("\tUSE NTP:\t{0}\t({1})".format(new_use_ntp, current_ntp))
