@@ -179,9 +179,8 @@ class LOGGING:
 	LOGCOUNT = 1
 
 	BOOTLOG = os.path.join(PATHS.LOGDIR, 'cme-boot.log')
-	APILOG = os.path.join(PATHS.LOGDIR, 'cme.log')
+	APILOG = os.path.join(PATHS.LOGDIR, 'cme-api.log')
 	HWLOG = os.path.join(PATHS.LOGDIR, 'cme-hw.log')
-	SERVERLOG = os.path.join(PATHS.LOGDIR, 'server.log')
 	ACCESSLOG = os.path.join(PATHS.LOGDIR, 'access.log')
 
 
