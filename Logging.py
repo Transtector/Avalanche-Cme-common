@@ -14,9 +14,9 @@ config: {
 def GetLogger(name, config):
 
 	# delete previous if configured and exists
-	if config.REMOVE_PREVIOUS:
+	if config['REMOVE_PREVIOUS']:
 		try:
-			os.remove(config.PATH)
+			os.remove(config['PATH'])
 		except:
 			pass
 
@@ -24,13 +24,13 @@ def GetLogger(name, config):
 	logger = logging.getLogger(name)
 
 	# set the logging level
-	logger.setLevel(config.LEVEL)
+	logger.setLevel(logging.getLevelName(config['LEVEL']))
 
 	# a nice format for log entries
-	formatter = logging.Formatter(config.FORMAT, datefmt=config.DATE)
+	formatter = logging.Formatter(config['FORMAT'], datefmt=config['DATE'])
 
 	# use rotating file handler
-	fh = logging.handlers.RotatingFileHandler(config.PATH, maxBytes=config.SIZE, backupCount=config.COUNT)
+	fh = logging.handlers.RotatingFileHandler(config['PATH'], maxBytes=config['SIZE'], backupCount=config['COUNT'])
 
 	fh.setFormatter(formatter)
 	fh.setLevel(logging.DEBUG)
