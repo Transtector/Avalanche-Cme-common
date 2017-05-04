@@ -7,6 +7,7 @@ config: {
 	SIZE: 10240,
 	COUNT: 1,
 	FORMAT: '%(asctime)s %(levelname)-8s [%(name)s] %(message)s',
+	LEVEL: 'DEBUG',
 	DATE: '%Y-%m-%d %H:%M:%S',
 	CONSOLE: False
 }
