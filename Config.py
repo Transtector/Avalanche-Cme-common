@@ -18,7 +18,7 @@
 	access to the user-configurable settings.
 '''
 
-import os, uuid, platform, json
+import os, uuid, platform, json, datetime
 
 
 # Temperature units enumeration
@@ -40,9 +40,9 @@ class PATHS:
 	'''
 	APPROOT = os.path.abspath(os.getcwd()) # /root/<package>, e.g., "/root/Cme-api/"
 	
-	USERDATA = os.path.abspath('/data') # User data is stored here
+	USERDATA = os.path.abspath('/Users/ssumjbrunner/workspace/Avalanche/Data') #'/data') # User data is stored here
 
-	WEB_ROOT = os.path.abspath('/www') # Web application is mapped from Cme-web docker container volume
+	WEB_ROOT = os.path.abspath('/Users/ssumjbrunner/workspace/Avalanche/Cme-web') #'/www') # Web application is mapped from Cme-web docker container volume
 
 	# All packages use a version file to convey their version
 	VERSION_FILE = os.path.join(APPROOT, 'VERSION')
@@ -121,9 +121,10 @@ class INFO:
 			'dateCode': ''
 		},
 		'cme': {
+			'productName': 'TracVision',
 			'modelNumber': 'UNKNOWN', 
 			'serialNumber': '00000000',
-			'dateCode': '20170101',
+			'dateCode': '{:%Y%m%d}'.format(datetime.datetime.now()),
 			'unlocked': True
 		}
 	}
