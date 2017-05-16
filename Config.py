@@ -40,9 +40,9 @@ class PATHS:
 	'''
 	APPROOT = os.path.abspath(os.getcwd()) # /root/<package>, e.g., "/root/Cme-api/"
 	
-	USERDATA = os.path.abspath('/Users/ssumjbrunner/workspace/Avalanche/Data') #'/data') # User data is stored here
+	USERDATA = os.path.abspath('/data') # User data is stored here
 
-	WEB_ROOT = os.path.abspath('/Users/ssumjbrunner/workspace/Avalanche/Cme-web') #'/www') # Web application is mapped from Cme-web docker container volume
+	WEB_ROOT = os.path.abspath('/www') # Web application is mapped from Cme-web docker container volume
 
 	# All packages use a version file to convey their version
 	VERSION_FILE = os.path.join(APPROOT, 'VERSION')
